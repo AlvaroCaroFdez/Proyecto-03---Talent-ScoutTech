@@ -66,7 +66,7 @@
 | Explicación del error … | La función utiliza ‘SQLite3::escapeString()’ para intentar sanitizar la entrada del usuario. Sin embargo, este método no es suficiente para prevenir inyecciones SQL porque la consulta sigue construyéndose dinámicamente mediante concatenación de cadenas. Esto permite que un atacante inyecte código SQL válido. |
 | :---- | :---- |
 | Solución: Cambiar la línea con el código … | $sql \= "SELECT userId FROM users WHERE username \= '" . $username . "' AND password \= '" . $password . "'"; |
-| … por la siguiente línea … | php $stmt \= $db-\>prepare('SELECT userId FROM users WHERE username \= ? AND password \= ?'); $stmt-\>bindValue(1, $username, SQLITE3\_TEXT); $stmt-\>bindValue(2, $password, SQLITE3\_TEXT); $result \= $stmt-\>execute(); |
+| … por la siguiente línea … | $stmt \= $db-\>prepare('SELECT userId FROM users WHERE username \= ? AND password \= ?'); $stmt-\>bindValue(1, $username, SQLITE3\_TEXT); $stmt-\>bindValue(2, $password, SQLITE3\_TEXT); $result \= $stmt-\>execute(); |
 
 <br>
 
